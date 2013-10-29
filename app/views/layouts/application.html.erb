@@ -4,10 +4,27 @@
   <title>Auth</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyBxL9E6d7IAD4v-y9y2Bm1dN_4x6kBcPU8&sensor=false"></script>
+  <%= yield :head %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+<div id="header">
+	<% if current_user %>
+		<%= button_to "Log out", "/authentications/x", :method => :delete %>
+	<% else %>
+
+	<% @new_user = User.new %>
+	<%= form_for @new_user, {url:"/authentications", method:"post"} do |u| %>
+	<%= u.label :email, "Email" %><%=u.text_field :email %><br />
+	
+	<%= u.label :password, "Password" %><%=u.text_field :password %><br />
+	<%= u.submit "Log In" %>
+
+<% end %>
+
+	<% end %>
+</div>
 
 <%= yield %>
 

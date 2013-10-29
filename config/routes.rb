@@ -2,7 +2,12 @@ Auth::Application.routes.draw do
 
  put 'groups' => 'groups#update'
 
- resources :users, :authentications, :groups
+ resources :groups, only:[:index, :show, :create, :update] do
+  resources :points, only:[:create]
+ end
+
+ resources :users, only:[:new, :create]
+ resources :authentications, only:[:new, :create, :destroy]
  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

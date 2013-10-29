@@ -6,6 +6,7 @@ class GroupsController < ApplicationController
 
 	def show
 		@group = Group.find(params[:id])
+		@point = Point.new	# In case they want to click and add a new point
 	end
 
 	def create

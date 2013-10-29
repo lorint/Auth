@@ -1,10 +1,11 @@
-<!-- Dude here is a list of all the groups -->
+<!-- Here is a list of all the groups -->
 <!-- and if you're logged in you can select which ones you belong to -->
 
 <% if current_user %>
 	Guess what, you're logged in as <%= current_user.email %>!
-<% end %>
 <br />
+<br />
+<% end %>
 <table>
 <%= form_tag :action => "update" do %>
 	<% @groups.each do |g| %>
@@ -22,13 +23,16 @@
 	<% end %>
 	</table>
 
-	<%= button_to "Update group membership", groups_url, method: :put %>
+	<% if current_user %>
+		<%= button_to "Update group membership", groups_url + "/_", method: :put %>
+	<% end %>
+
 <% end %>
 <hr />
 
 Create a new group:
 <%= form_for @group do |newG| %>
 	<%= newG.text_field :name %><br />
-	<%= newG.text_area :descrip, cols:"30", rows:"10" %><br />
-	<%= newG.submit "Create this group!" %>
+	<%= newG.text_area :descrip, cols:"30", rows:"6" %><br />
+	<%= newG.submit "Make it happen!" %>
 <% end %>

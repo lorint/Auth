@@ -7,4 +7,5 @@ class Point
  field :descrip, type:String
 
  embedded_in :group
+ belongs_to :user
 end
